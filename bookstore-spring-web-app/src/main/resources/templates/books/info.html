@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Info</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Show Book Info</h2>
+
+    <p th:if="${book} == null">Book not found</p>
+
+    <th:block th:if="${book}">
+        <strong th:text="${book.id}"></strong>
+        <strong th:text="${book.title}"></strong>
+        <strong th:text="${book.description}"></strong>
+        <strong th:text="${book.isbn}"></strong>
+        <strong th:text="${book.category}"></strong>
+<!--        <strong th:text="${book.publicationDate}"></strong>-->
+    </th:block>
+
+    <br/>
+
+    <a th:href="@{/book/}">List books</a>
+
+</div>
+
+</body>
+</html>

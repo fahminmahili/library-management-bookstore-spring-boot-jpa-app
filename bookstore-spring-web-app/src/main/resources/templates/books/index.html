@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #008CBA;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #008CBA;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #00557D;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Books List</h2>
+    <a class="btn" th:href="@{/book/new}">Add New Book</a>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>ISBN</th>
+            <th>Category</th>
+<!--            <th>Publication Date</th>-->
+            <th>Actions</th>
+        </tr>
+
+        <p th:if="${books} != null" th:text="|Number of Available Books: ${#lists.size(books)}|"></p>
+
+        <tr th:if="${#lists.isEmpty(books)}">
+            <td colspan="4">The book list is empty</td>
+        </tr>
+
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}">ID</td>
+            <td th:text="${book.title}">Title</td>
+<!--            <td th:text="${book.authors}">Author ID</td>-->
+            <td th:text="${#lists.toList(book.authors)}"></td>
+
+            <td th:text="${book.description}">Description</td>
+            <td th:text="${book.isbn}">ISBN</td>
+            <td th:text="${book.category}">Category</td>
+<!--            <td th:text="${book.publicationDate}">Publication Date</td>-->
+
+
+            <td>
+                <th:block th:with="id=${book.id}">
+                    <a th:href="@{'/book/update/' + ${id}}">Update</a>
+                    <a th:href="@{'/book/delete/' + ${id}}">Delete</a>
+                </th:block>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/}">Back to HOME</a>
+
+</div>
+</body>
+</html>

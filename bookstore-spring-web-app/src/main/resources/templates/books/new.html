@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create a book</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 36px;
+        }
+
+        form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="submit"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        a {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Create New Book</h2>
+
+
+
+<form action="#" method="POST" th:action="@{/book/}" th:object="${book}">
+<!--    <input type="text" th:field="*{id}" placeholder="Book ID"/> <br/>-->
+    <input type="text" th:field="*{title}" placeholder="Book Title" required/> <br/>
+    <input type="text" th:field="*{authors}" placeholder="Author ID" required/> <br/>
+    <input type="text" th:field="*{description}" placeholder="Book Description"/> <br/>
+    <input type="text" th:field="*{isbn}" placeholder="Book ISBN" required/> <br/>
+    <input type="text" th:field="*{category}" placeholder="Book Category" required/> <br/>
+<!--    <input type="date" th:field="*{publicationDate}" placeholder="Publication date"/> <br/>-->
+
+    <input type="submit" value="Save Book"/>
+</form>
+
+<!--<a th:href="@{/list}">Back to the list</a>-->
+<a onclick="history.go(-1)">Back to the list</a>
+
+</body>
+</html>
+

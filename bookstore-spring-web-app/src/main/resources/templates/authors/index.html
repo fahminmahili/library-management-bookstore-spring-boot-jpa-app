@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #008CBA;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #008CBA;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #00557D;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Authors List</h2>
+<a href="/author/new">Add New Author</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Books</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <p th:if="${authors} != null" th:text="|Number of Authors: ${#lists.size(authors)}|"></p>
+
+    <tr th:if="${#lists.isEmpty(authors)}">
+        <td colspan="4">The author list is empty</td>
+    </tr>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.firstName}"></td>
+        <td th:text="${author.lastName}">LastName</td>
+        <td th:text="${author.email}">Email</td>
+        <td th:text="${author.gender}">Gender</td>
+        <td>
+            <select>
+                <option th:each="book : ${author.books}"
+                        th:text="${book.title}"
+                        th:value="${book.id}">
+                </option>
+            </select>
+        </td>
+        <td>
+            <th:block th:with="id=${author.id}">
+                <a th:href="@{'/author/update/' + ${id}}">Update</a>
+                <a th:href="@{'/author/delete/' + ${id}}">Delete</a>
+<!--                <a th:href="@{'/author/' + ${id} + '/addBook'}">Add book</a>-->
+            </th:block>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h4> Page [[${currentPage}]] / [[${totalPages}]]</h4>
+<h4> Displaying [[${nbElements}]] / [[${totalElements}]]</h4>
+
+<br/><a th:href="@{/}"> Back to HOME </a>
+</body>
+</html>
